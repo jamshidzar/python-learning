@@ -7,3 +7,5 @@ print("Phase 0 started")
 
 x = 1 + 2
 print(x)
+
+print("[bold blue]Git works![/bold blue]")
