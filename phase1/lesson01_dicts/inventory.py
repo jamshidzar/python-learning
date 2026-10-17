@@ -31,11 +31,11 @@ def low_stock(inventory, limit):
     return sorted(result)
 
 
-# print(create_inventory(["apple", "milk", "apple", "bread", "apple"]))
-# print(create_inventory([]))
+print(create_inventory(["apple", "milk", "apple", "bread", "apple"]))
+print(create_inventory([]))
 
-# print(add_items({"apple": 3, "milk": 1}, ["apple", "bread", "bread"]))
-# print(add_items({"apple": 3}, []))
+print(add_items({"apple": 3, "milk": 1}, ["apple", "bread", "bread"]))
+print(add_items({"apple": 3}, []))
 
 print(decrement_items({"apple": 2, "milk": 1}, ["apple", "milk", "milk", "bread"]))
 print(decrement_items({"apple": 1}, []))
