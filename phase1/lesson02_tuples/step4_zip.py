@@ -7,8 +7,8 @@ scores = [85, 92, 78]
 for i, b in zip(names, scores):
     print(f"{i}: {b}")
 
-for i, (name, scores) in enumerate(zip(names, scores), start=1):
-    print(f"{i}. {name} {scores}. ")
+for i, (name, score) in enumerate(zip(names, scores), start=1):
+    print(f"{i}. {name} {score}. ")
 
 
 # @Drill 2. Given subjects = ("math", "python", "english") and grades = (90, 88, 75), build a dict report from them using zip, then print it.
