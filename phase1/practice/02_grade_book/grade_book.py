@@ -3,6 +3,8 @@ Student Grade Book: a CLI app to add students, record their grades,
 and see averages, letter grades and who is passing.
 """
 
+PASSING_GRADE = 60
+
 
 def add_student(grade_book):
     name = input("Student name: ").strip().title()
@@ -60,6 +62,62 @@ def show_students(grade_book):
             print(f"{name}: no grades yet")
 
 
+def average(grades):
+    return sum(grades) / len(grades)
+
+
+def letter_grade(avg):
+    if avg >= 90:
+        return "A"
+    if avg >= 80:
+        return "B"
+    if avg >= 70:
+        return "C"
+    if avg >= 60:
+        return "D"
+    return "F"
+
+
+def show_report(grade_book):
+    print("\n--- REPORT ---")
+
+    if not grade_book:
+        print("No students yet.")
+        return
+
+    # Step 3: one line per student, and collect averages for the summary
+    averages = {}
+    for name, grades in grade_book.items():
+        if grades:
+            avg = average(grades)
+            averages[name] = avg
+            print(f"{name}: {avg:.1f} ({letter_grade(avg)})")
+        else:
+            print(f"{name}: no grades yet")
+
+    if not averages:
+        return
+
+    # Step 4: class summary
+    passing = [name for name, avg in averages.items() if avg >= PASSING_GRADE]
+    class_avg = average(list(averages.values()))
+
+    top_name = ""
+    top_avg = -1
+    for name, avg in averages.items():
+        if avg > top_avg:
+            top_name = name
+            top_avg = avg
+
+    print("\n--- SUMMARY ---")
+    if passing:
+        print(f"Passing: {', '.join(passing)}")
+    else:
+        print("Passing: none")
+    print(f"Class average: {class_avg:.1f}")
+    print(f"Top student: {top_name} ({top_avg:.1f})")
+
+
 def main():
     grade_book = {}
 
@@ -68,7 +126,8 @@ def main():
         print("1. Add student")
         print("2. Add grade")
         print("3. Show students")
-        print("4. Quit")
+        print("4. Report")
+        print("5. Quit")
         choice = input("Choose an option: ").strip()
 
         if choice == "1":
@@ -78,10 +137,12 @@ def main():
         elif choice == "3":
             show_students(grade_book)
         elif choice == "4":
+            show_report(grade_book)
+        elif choice == "5":
             print("Goodbye!")
             break
         else:
-            print("Invalid option. Please choose 1-4.")
+            print("Invalid option. Please choose 1-5.")
 
 
 main()
